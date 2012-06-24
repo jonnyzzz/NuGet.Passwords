@@ -1,0 +1,10 @@
+bin*
+**/bin
+**/obj
+**.suo
+**/*.user
+*.user
+*.dotCover
+*.cache
+_ReSharper*
+packages/**/*
