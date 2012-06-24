@@ -1,2 +1,2 @@
-set NUGET_EXTENSIONS_PATH=%~dp0
+@set NUGET_EXTENSIONS_PATH=%~dp0
 NuGet %*
