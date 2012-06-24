@@ -21,7 +21,7 @@ using NuGet;
 
 namespace EugenePetrenko.NuGet.Passwords
 {
-  [Command("TeamCity.AuthorizeFeed", "Adds login/password into NuGet settings")]
+  [Command("AuthorizeFeed", "Adds login/password into NuGet settings")]
   public class AuthorizeFeedCommand : CommandBase
   {
     [Option("Feed source")]
