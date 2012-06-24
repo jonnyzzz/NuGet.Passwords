@@ -20,4 +20,4 @@ make NuGet.exe start with plugin.
 It's supposed you have NuGet.exe avaible in 
 system PATH.
 
-For usage details, see NuGet-ex.bat help Authorize
+For usage details, see NuGet-ex.bat help AuthorizeFeed
