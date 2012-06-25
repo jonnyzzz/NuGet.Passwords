@@ -36,25 +36,34 @@ namespace EugenePetrenko.NuGet.Passwords
     [Import]
     public IPackageSourceProvider SourceProvider { get; set; }
 
+    private const string METADATA = "/$metadata";
+
     protected override void ExecuteCommandImpl()
     {
+      Func<string, String> prepare = url => url.TrimEnd('/');
+      Func<string, string, bool> urlEquals = (x,y) => prepare(x).Equals(prepare(y), StringComparison.InvariantCultureIgnoreCase);
+
       var allSources = SourceProvider.LoadPackageSources().ToArray();
-      Func<PackageSource, bool> predicate = x => Source.Equals(x.Source, StringComparison.InvariantCultureIgnoreCase);
+      
+      Func<PackageSource, bool> predicate = x => urlEquals(Source, x.Source);
+      Func<PackageSource, bool> filter = x => urlEquals(Source + METADATA, x.Source);
    
       var source = allSources.FirstOrDefault(predicate);
-
       if (source == null)
       {
         Console.WriteLine("No such source was found. Creating new source...");
         source = new PackageSource(Source, Source, true);
       }
 
-      source.UserName = UserName;
-      source.Password = Password;
+      var metadata = new PackageSource(Source + METADATA, Source + "_metadata", false);
+      var newFeeds = new[] {source, metadata};
+      foreach (var s in newFeeds)
+      {
+        s.UserName = UserName;
+        s.Password = Password;
+      }
 
-      SourceProvider.SavePackageSources(
-        new[]{source}.Union(allSources.Where(x=>!predicate(x))).ToArray()
-        );
+      SourceProvider.SavePackageSources(newFeeds.Union(allSources.Where(x=>!predicate(x) && !filter(x))).ToArray());
     }
   }
 }
