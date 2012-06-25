@@ -10,7 +10,6 @@ close ALL Visual Studio instances.
 License: Apache 2.0
 ===================
 
-
 This is a add-in to NuGet console that 
 makes NuGet remember password for feed.
 
@@ -20,4 +19,8 @@ make NuGet.exe start with plugin.
 It's supposed you have NuGet.exe avaible in 
 system PATH.
 
+In case you do not have NuGet.exe, simple
+install NuGet.CommandLine package. 
+
 For usage details, see NuGet-ex.bat help AuthorizeFeed
+
