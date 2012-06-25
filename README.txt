@@ -6,6 +6,9 @@ Small handy NuGet usage helper.
 To make it work, first, 
 close ALL Visual Studio instances.
 
+Available as NuGet Tool Package, see
+https://nuget.org/packages/NuGet.Passwords.Persist
+
 
 License: Apache 2.0
 ===================
